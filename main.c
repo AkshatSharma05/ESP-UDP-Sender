@@ -64,9 +64,7 @@ int main(){
 		dt = (clock() - time_i)*1000/CLOCKS_PER_SEC;
 
 		if(dt > FREQ_MS){
-			if(sendto(udp_sock, message, strlen(message), 0, (struct sockaddr*) &addr, sizeof(addr)) < 0){
-				printf("Failed to send message. \n");;
-			}
+			if(sendto(udp_sock, message, strlen(message), 0, (struct sockaddr*) &addr, sizeof(addr)) < 0) printf("Failed to send message. \n");
 			
 			time_i = clock();
 			printf("TIMESTAMP: %.1f: Sending msg -> \"%s\" to %d\n", (float)(time_i)*1000/CLOCKS_PER_SEC,message, addr.sin_addr.s_addr);
