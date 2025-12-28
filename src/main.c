@@ -12,6 +12,12 @@ Learned how to create Makefiles.
 Studied how UDP works.
 Got UDP send working.
 Implemented the feature to set frequency.
+
+28 Dec 2025
+Got string transfer working between ESP and PC
+I also have to make Wifi work without the example snippet
+After that I have two option: 1. Image on OLED;  2. Telemetry
+Image does sound cooler
 */
 
 #include <stdio.h>
@@ -37,7 +43,7 @@ int main(){
 	
 	/* inet_addr: Convert Internet host address from numbers-and-dots notation in CP
 	into binary data in network byte order.  */
-	addr.sin_addr.s_addr = inet_addr("192.168.1.38"); //receiver IP
+	addr.sin_addr.s_addr = inet_addr("192.168.1.70"); //receiver IP
 	
 	/*
 	FROM THE MAN PAGE
