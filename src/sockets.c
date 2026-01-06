@@ -29,7 +29,7 @@ void initSocket ( int* udp_sock , struct sockaddr_in* addr, in_addr_t recv_addr 
 
 }
 
-void sendPacket(int* udp_sock, const char* message, struct sockaddr_in* addr){
-    if(sendto(*udp_sock, message, strlen(message), 0, (struct sockaddr*) addr, sizeof(*addr)) < 0) 
+void sendPacket(int* udp_sock, const uint8_t* message, size_t len, struct sockaddr_in* addr){
+    if(sendto(*udp_sock, message, len, 0, (struct sockaddr*) addr, sizeof(*addr)) < 0) 
         printf("Failed to send message. \n");
 }
