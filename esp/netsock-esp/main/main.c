@@ -24,11 +24,10 @@ static void udp_server_task(){
     if(sockfd < 0) { ESP_LOGE(TAG, "Failed to create socket!"); }
 
     addr.sin_family = AF_INET;
-    // addr.sin_addr.s_addr = inet_addr("192.168.1.70");
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
     addr.sin_port = htons(PORT);
 
-    char buf[10];
+    uint8_t buf[1024];
     int len;
 
     /*
@@ -48,12 +47,17 @@ static void udp_server_task(){
 
         socklen_t socklen = sizeof(addr_from);
 
-        if((len = recvfrom(sockfd, &buf, sizeof(buf), 0, (struct sockaddr*) &addr_from, &socklen)) < 0){
+        if((len = recvfrom(sockfd, buf, sizeof(buf), 0, (struct sockaddr*) &addr_from, &socklen)) < 0){
             ESP_LOGE(TAG, "No msg received!");
         }
 
-        buf[len] = 0;
-        ESP_LOGI(TAG, "%s \n", buf);
+        // buf[len] = 0;
+        if(len > 0){
+            for(int i = 0; i < len; i++){
+                // printf("0x%02X, ", bmap[i]);
+                ESP_LOGI(TAG, "0x%02X %d", buf[i], len);
+            }
+        }
     }
     if (sockfd != -1) {
         ESP_LOGE(TAG, "Shutting down socket and restarting...");
